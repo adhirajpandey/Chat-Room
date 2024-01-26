@@ -6,6 +6,8 @@ This web application enables users to engage in live conversations within chat r
 
 Realtime two-way communication is achieved through the utilization of web sockets. HTML, CSS and Bootstrap used for frontend and Flask for backend.
 
+Test it out at: https://chatroom.adhiraj.live/
+
 
 ## Features
 
