@@ -10,6 +10,11 @@ socketio = SocketIO(app)
 
 rooms = {}
 
+
+def get_current_datetime():
+    datetime_string = datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return datetime_string
+
 def generate_room_code(length):
     code = ""
     for i in range(length):
@@ -73,9 +78,8 @@ def connect():
         return None
 
     join_room(room)
-    datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    send({"name": username, "message": "has entered the room", "datetime": datetime_string}, to=room)
+    send({"name": username, "message": "has entered the room", "datetime": get_current_datetime()}, to=room)
 
     rooms[room]["members"] += 1
     print(f"{username} entered room {room}")
@@ -91,11 +95,27 @@ def disconnect():
         rooms[room]["members"] -= 1
         if rooms[room]["members"] <= 0:
             del rooms[room]
-
-    datetime_string = datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
-    send({"name": username, "message": "has left the room", "datetime": datetime_string}, to=room)
+    send({"name": username, "message": "has left the room", "datetime": get_current_datetime()}, to=room)
     print(f"{username} left room {room}")
+
+@socketio.on("message")
+def message(data):
+    room = session.get("room")
+    if room not in rooms:
+        return None
+    
+    content = {
+        "name": session.get("username"),
+        "message": data["data"],
+        "datetime": get_current_datetime()
+    }
+
+    send(content, to=room)
+    rooms[room]["messages"].append(content)
+
+    print(f"{session.get('name')} sent: {data['data']}")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
