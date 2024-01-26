@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container border border-dark text-center" style="margin-top: 2vw; padding:2vw; width: 50vw;">
+    <div>
+        <h2>Welcome to Live Chat Application</h2>
+    </div>
+    <form method="POST" class="form">
+        <input type="text" name="username" placeholder="Enter your name" required />
+        <input type="submit" value="Start Chatting" />
+    </form>
+</div>
+
+{% endblock %}
