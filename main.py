@@ -60,10 +60,10 @@ def index():
 @app.route("/room", methods=["GET"])
 def room():
     room = session.get("room")
-    if room is None:
+    if room is None or room not in rooms:
         return redirect(url_for("index"))
     
-    return render_template("room.html", roomcode=room)
+    return render_template("room.html", room=room, messages=rooms[room]["messages"])
 
 
 @socketio.on("connect")
@@ -79,7 +79,7 @@ def connect():
 
     join_room(room)
 
-    send({"name": username, "message": "has entered the room", "datetime": get_current_datetime()}, to=room)
+    send({"name": username, "message": "entered the room", "datetime": get_current_datetime()}, to=room)
 
     rooms[room]["members"] += 1
     print(f"{username} entered room {room}")
@@ -96,7 +96,7 @@ def disconnect():
         if rooms[room]["members"] <= 0:
             del rooms[room]
         
-    send({"name": username, "message": "has left the room", "datetime": get_current_datetime()}, to=room)
+    send({"name": username, "message": "left the room", "datetime": get_current_datetime()}, to=room)
     print(f"{username} left room {room}")
 
 @socketio.on("message")

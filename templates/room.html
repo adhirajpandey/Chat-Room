@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container border border-dark text-center" style="margin-top: 2vw; margin-bottom: 2vw; padding:2vw; width: 50vw; border-radius:10px;">
-    <h2><strong>Chat Room : </strong>{{ roomcode }}</h2>
+    <h2><strong>Chat Room : </strong>{{ room }}</h2>
     <div class="message-box">
         <div class="messages" id="messages">
         </div>
@@ -21,11 +21,11 @@
 
     const createMessage = (name, msg, datetime) => {
         const content = `
-        <div>
+        <div class="message-text">
             <span>
                 <strong>${name}</strong>: ${msg}
             </span>
-            <span class="muted">
+            <span class="msgtime-muted">
                 ${datetime}
             </span>
         </div>
@@ -46,4 +46,8 @@
 
 </script>
 
-{% endblock content %}
+{% for msg in messages %}
+<script type="text/javascript">createMessage("{{ msg.name }}", "{{ msg.message }}", "{{ msg.datetime }}");</script>
+{% endfor %}
+
+{% endblock content %}""
