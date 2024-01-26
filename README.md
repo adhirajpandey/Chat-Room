@@ -31,3 +31,6 @@ Realtime two-way communication is achieved through the utilization of web socket
 - [ ] Message Encryption
 
 
+## Sample
+
+![Screenshot 2024-01-27 013816](https://github.com/adhirajpandey/Chat-Room/assets/87516052/a7e17247-0d22-4550-bb31-3e6c06662d37)
