@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from string import ascii_uppercase
 import random
 from flask_socketio import join_room, leave_room, send, SocketIO
 from datetime import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "hellosecretkey"
 socketio = SocketIO(app)
 
@@ -30,28 +32,30 @@ def index():
     print(rooms)
     session.clear()
     if request.method == "POST":
-        username = request.form.get("username")
-        roomcode = request.form.get("roomcode")
-        join_room = request.form.get("join-room", False)
-        create_room = request.form.get("create-room", False)
+        json_data = request.get_json(force=True)
 
-        # data = [username, roomcode, join_room, create_room]
-    
-        if join_room != False:
-            if roomcode == "":
+        username = json_data.get("username")
+        request_type = json_data.get("requestType")
+        roomcode = json_data.get("roomCode", None)
+
+        if request_type == "join-room":
+            if roomcode == "" or len(roomcode) < 4:
                 return render_template('index.html', message="Please Input Valid Room Code")
             elif roomcode not in rooms:
                 return render_template('index.html', message="Room does not Exist")
             else:
                 room = roomcode
-        elif create_room != False:
-            room = generate_room_code(4)
-            rooms[room] = {"members": 0, "messages": []}
+        elif request_type == "create-room":
+            if username == "" or len(username) < 2 or len(username) > 10:
+                return render_template('index.html', message="Please Input Valid User Name")
+            else:
+                room = generate_room_code(4)
+                rooms[room] = {"members": 0, "messages": []}
 
         session["room"] = room
         session["username"] = username
 
-        return redirect(url_for('room'))
+        return jsonify({"msg": "SUCCESS"})
 
     else:
         return render_template('index.html')
