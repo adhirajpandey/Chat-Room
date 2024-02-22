@@ -2,30 +2,32 @@
 
 {% block content %}
 
-<div class="container border border-dark text-center" style="margin-top: 2vw; padding:2vw; width: 50vw; border-radius:10px;">
-    <div>
-        <h2>Welcome to Live Chat Application</h2>
+<div class="container mx-auto text-center p-4 ">
+    <div class="text-4xl text-center font-bold">
+        Welcome to Live Chat Application
     </div>
     {% if message %}
         <div>
-            <h4 class="text-danger">{{ message }}</h4>
+            <h4>{{ message }}</h4>
         </div>
     {% endif %}
-    <form method="POST" class="form">
-        <div style="padding-top: 1vh;">
-            <label><strong>User Name : </strong></label>
-            <input type="text" name="username" placeholder="Enter your name" required />
-            <br>
-            <br>
-            <label><strong>Room Code : </strong></label>
-            <input type="text" name="roomcode" placeholder="Enter Room Code" />
-            <br>
-            <br>
-            <button class="btn btn-dark" type="submit" name="join-room">Join Room</button>
-            <h4>OR</h4>
-            <button class="btn btn-dark" type="submit" name="create-room">Create New Room</button>
-        </div>
-    </form>
+
+    <div class="container p-4 mt-20">
+        <nav class="space-x-1 text-center m-2">
+            <button id="join-button" type="button" class="bg-slate-500 text-base text-white hover:bg-slate-800 font-bold rounded-lg py-2 px-3">
+            Join Room
+            </button>
+            <button id="create-button" type="button" class="bg-slate-500 text-base text-white hover:bg-slate-800 font-bold rounded-lg py-2 px-3">
+            Create Room
+            </button>
+        </nav>
+    </div>
+
+    <div id="parent-input-div"></div>
+    <button id="btn-submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg px-2 py-2">Join</button>
+
+    
+    
 </div>
 
 {% endblock %}
