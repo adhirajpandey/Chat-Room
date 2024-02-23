@@ -1,31 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-from string import ascii_uppercase
-import random
 from flask_socketio import join_room, leave_room, send, SocketIO
-from datetime import datetime
 from flask_cors import CORS
+from utils import get_current_datetime, generate_room_code, rooms
 
 app = Flask(__name__)
 CORS(app)
 app.secret_key = "hellosecretkey"
 socketio = SocketIO(app)
-
-rooms = {}
-
-
-def get_current_datetime():
-    datetime_string = datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return datetime_string
-
-def generate_room_code(length):
-    code = ""
-    for i in range(length):
-        code = code + random.choice(ascii_uppercase)
-
-    if code in rooms:
-        generate_room_code(length)
-    else:
-        return code
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -68,6 +49,7 @@ def room():
         return redirect(url_for("index"))
     
     return render_template("room.html", room=room, messages=rooms[room]["messages"])
+    # return render_template("room.html")
 
 
 @socketio.on("connect")
@@ -118,8 +100,8 @@ def message(data):
     send(content, to=room)
     rooms[room]["messages"].append(content)
 
-    print(f"{session.get('name')} sent: {data['data']}")
+    print(f"{session.get('username')} sent: {data['data']}")
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
