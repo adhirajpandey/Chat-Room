@@ -2,18 +2,19 @@
 
 {% block content %}
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center min-h-screen">
     <div id="title" class="text-3xl md:text-4xl text-white text-center font-bold p-4 whitespace-normal">
         <span id="title-text" class="cursor-pointer">Chat Room - {{ room }}</span>
     </div>
-    <div class="bg-slate-800 max-w-screen-xs md:w-9/12 border-2 border-white rounded-xl text-white text-base md:text-xl my-4 m-2 p-4 whitespace-normal overflow-hidden">
+    <div class="flex-grow bg-slate-700 max-w-screen-xs md:w-9/12 border-2 border-white rounded-xl text-white text-base md:text-xl my-4 m-2 p-4 whitespace-normal overflow-hidden">
         <div class="messages" id="messages"></div>
     </div>
-    <br>
-    <input id="message" name="message" type="text" class="bg-slate-700 text-white rounded-xl md:w-5/12 px-2 py-2" placeholder="Type your message..." />
-    <br>
-    <button class="bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg px-2 py-2" type="button" name="send" id="send-btn" onclick="sendMessage()">Send Message</button>
+    <div class="mt-auto md:w-9/12 flex items-center justify-center mb-4">
+        <input id="message" name="message" type="text" class="bg-slate-700 text-white rounded-xl md:w-5/12 px-2 py-2" placeholder="Type your message..." />
+        <button class="bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl mx-2 px-2 py-2" type="button" name="send" id="send-btn" onclick="sendMessage()">Send Message</button>
+    </div>
 </div>
+
 
 <script type="text/javascript">
     var socketio = io();
