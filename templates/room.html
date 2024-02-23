@@ -2,16 +2,17 @@
 
 {% block content %}
 
-<div class="container border border-dark text-center" style="margin-top: 2vw; margin-bottom: 2vw; padding:2vw; width: 50vw; border-radius:10px;">
-    <h2><strong>Chat Room : </strong>{{ room }}</h2>
-    <div class="message-box">
-        <div class="messages" id="messages">
-        </div>
+<div class="flex flex-col items-center">
+    <div id="title" class="text-3xl md:text-4xl text-white text-center font-bold p-4 whitespace-normal">
+        <span id="title-text" class="cursor-pointer">Chat Room - {{ room }}</span>
+    </div>
+    <div class="bg-slate-800 max-w-screen-xs md:w-9/12 border-2 border-white rounded-xl text-white text-base md:text-xl my-4 m-2 p-4 whitespace-normal overflow-hidden">
+        <div class="messages" id="messages"></div>
     </div>
     <br>
-    <input type="text" rows="3" placeholder="Message" name="message" id="message"  style="width: 30vw; margin-bottom:1vh;"/>
+    <input id="message" name="message" type="text" class="bg-slate-700 text-white rounded-xl md:w-5/12 px-2 py-2" placeholder="Type your message..." />
     <br>
-    <button class="btn btn-dark" type="button" name="send" id="send-btn" onclick="sendMessage()">Send</button>
+    <button class="bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg px-2 py-2" type="button" name="send" id="send-btn" onclick="sendMessage()">Send Message</button>
 </div>
 
 <script type="text/javascript">
@@ -25,7 +26,7 @@
             <span>
                 <strong>${name}</strong>: ${msg}
             </span>
-            <span class="msgtime-muted">
+            <span class="text-xs">
                 ${datetime}
             </span>
         </div>
