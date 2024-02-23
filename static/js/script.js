@@ -1,4 +1,3 @@
-
 const BASE_BACKEND_URL = "http://localhost:5000/"
 let flag = "join-room"
 
@@ -35,21 +34,21 @@ async function sendRequest() {
         return {data: data, status: response.status}
     } catch (error) {
         console.error(error)
+        return {data: "", status: 500}
     }
 }
 
 function getFormHtml() {
     if (flag == "join-room") {
         formUI = `
-        <div id="user-inputs-div" class="container p-4 ">
-            <input id="input-name" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 w-80 rounded-lg" type="text" placeholder="Enter Name" />
-            <br>
-            <input id="input-room" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 w-80 rounded-lg" type="text" placeholder="Enter Room Code" />
+        <div id="user-inputs-div" class="p-4 flex flex-col">
+            <input id="input-name" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 md:w-80 rounded-lg" type="text" placeholder="Enter Name" />
+            <input id="input-room" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 md:w-80 rounded-lg" type="text" placeholder="Enter Room Code" />
         </div>`
     } else {
         formUI = `
-        <div id="user-inputs-div" class="container p-4 ">
-            <input id="input-name" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 w-80 rounded-lg" type="text" placeholder="Enter Name" />
+        <div id="user-inputs-div" class="p-4 flex flex-cols">
+            <input id="input-name" class="text-white font-bold bg-slate-800 flex-grow outline-none px-2 py-2 my-2 md:w-80 rounded-lg" type="text" placeholder="Enter Name" />
         </div>`
     }
     return formUI
