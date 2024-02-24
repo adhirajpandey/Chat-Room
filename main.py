@@ -49,7 +49,6 @@ def room():
         return redirect(url_for("index"))
     
     return render_template("room.html", room=room, messages=rooms[room]["messages"])
-    # return render_template("room.html")
 
 
 @socketio.on("connect")
@@ -99,8 +98,6 @@ def message(data):
 
     send(content, to=room)
     rooms[room]["messages"].append(content)
-
-    print(f"{session.get('username')} sent: {data['data']}")
 
 
 if __name__ == '__main__':

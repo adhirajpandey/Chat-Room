@@ -3,7 +3,7 @@ import random
 from string import ascii_uppercase
 
 def get_current_datetime():
-    datetime_string = datetime_string = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    datetime_string = datetime_string = datetime.now().strftime("%Y-%m-%d||%H:%M:%S")
     return datetime_string
 
 rooms = {}
