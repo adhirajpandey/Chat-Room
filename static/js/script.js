@@ -1,4 +1,4 @@
-const BASE_BACKEND_URL = "http://localhost:5000/"
+const BASE_BACKEND_URL = "https://chatroom.adhiraj.live/"
 let flag = "join-room"
 
 async function sendRequest() {
