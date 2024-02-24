@@ -4,7 +4,7 @@
 
 This web application enables users to engage in live conversations within chat rooms. Any user has the ability to create a new chat room and share its unique code with multiple participants, who can then join the conversation using that code. 
 
-Realtime two-way communication is achieved through the utilization of web sockets. HTML, CSS and Bootstrap used for frontend and Flask for backend.
+Realtime two-way communication is achieved through the utilization of web sockets. HTML, JS and Tailwind used for frontend and Flask for backend.
 
 Test it out at: https://chatroom.adhiraj.live/
 
@@ -29,10 +29,6 @@ Test it out at: https://chatroom.adhiraj.live/
 ## To-Do
 
 - [x] Maintain Message History
+- [x] UI Improvements
 - [ ] Integrate DB for persistent storage
 - [ ] Message Encryption
-
-
-## Sample
-
-![Screenshot 2024-01-27 013816](https://github.com/adhirajpandey/Chat-Room/assets/87516052/a7e17247-0d22-4550-bb31-3e6c06662d37)
