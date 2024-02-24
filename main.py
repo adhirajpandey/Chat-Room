@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+from flask import Flask, render_template, request, session, jsonify, abort
 from flask_socketio import join_room, leave_room, send, SocketIO
 from flask_cors import CORS
 from utils import get_current_datetime, generate_room_code, rooms
@@ -10,7 +10,6 @@ socketio = SocketIO(app)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    print(rooms)
     session.clear()
     if request.method == "POST":
         json_data = request.get_json(force=True)
@@ -21,14 +20,14 @@ def index():
 
         if request_type == "join-room":
             if roomcode == "" or len(roomcode) < 4:
-                return render_template('index.html', message="Please Input Valid Room Code")
+                abort(400)
             elif roomcode not in rooms:
-                return render_template('index.html', message="Room does not Exist")
+                abort(404)
             else:
                 room = roomcode
         elif request_type == "create-room":
             if username == "" or len(username) < 2 or len(username) > 10:
-                return render_template('index.html', message="Please Input Valid User Name")
+                abort(400)
             else:
                 room = generate_room_code(4)
                 rooms[room] = {"members": 0, "messages": []}
@@ -46,8 +45,8 @@ def index():
 def room():
     room = session.get("room")
     if room is None or room not in rooms:
-        return redirect(url_for("index"))
-    
+        abort(404)
+
     return render_template("room.html", room=room, messages=rooms[room]["messages"])
 
 
@@ -67,7 +66,6 @@ def connect():
     send({"name": username, "message": "entered the room", "datetime": get_current_datetime()}, to=room)
 
     rooms[room]["members"] += 1
-    print(f"{username} entered room {room}")
 
 @socketio.on("disconnect")
 def disconnect():
@@ -82,7 +80,6 @@ def disconnect():
             del rooms[room]
         
     send({"name": username, "message": "left the room", "datetime": get_current_datetime()}, to=room)
-    print(f"{username} left room {room}")
 
 @socketio.on("message")
 def message(data):
