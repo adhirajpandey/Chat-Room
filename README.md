@@ -32,3 +32,12 @@ Test it out at: https://chatroom.adhiraj.live/
 - [x] UI Improvements
 - [ ] Integrate DB for persistent storage
 - [ ] Message Encryption
+
+## Demonstration
+
+- Youtube Demo Link: https://www.youtube.com/watch?v=aZolRUkhIb4
+- Index Page Screenshot:
+  
+    ![chatroom_index1](https://github.com/adhirajpandey/Chat-Room/assets/87516052/90ba178c-27ea-4d48-a0ac-36de898092c3)
+
+    
