@@ -38,7 +38,7 @@ def index():
         return jsonify({"msg": "SUCCESS"})
 
     else:
-        return render_template('index.html')
+        return render_template('index.html', room_count=len(rooms))
     
 
 @app.route("/room", methods=["GET"])

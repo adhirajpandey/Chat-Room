@@ -30,6 +30,7 @@ Test it out at: https://chatroom.adhiraj.live/
 
 - [x] Maintain Message History
 - [x] UI Improvements
+- [x] Live Room Count
 - [ ] Integrate DB for persistent storage
 - [ ] Message Encryption
 
