@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-room
+    volumes:
+      - .:/app
+    ports:
+      - "${PORT}:8000"
