@@ -1,4 +1,4 @@
-const BASE_BACKEND_URL = "https://chatroom.adhirajpandey.me/"
+const BASE_BACKEND_URL = "https://chatroom.adhirajpandey.tech/"
 let flag = "join-room"
 
 async function sendRequest() {
